@@ -60,9 +60,10 @@ int main(){
         for(const auto& entry :fs::recursive_directory_iterator(scan_root)){
             if(entry.path().extension()==".txt"){
                 fs::path tgt = out_dir / entry.path().filename();
-                fs::copy_file(entry.path(), tgt);
+                fs::copy_file(entry.path(), tgt);   
                 i++;
             }
+        std::cout<<i<<"Files have been moved in total"<<"/n";
         }
     }
 }
