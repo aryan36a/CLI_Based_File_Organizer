@@ -1,1 +1,8 @@
 .vscode/
+.testing/
+.working/
+.organizer
+*.exe
+*.o
+testing/
+working/
