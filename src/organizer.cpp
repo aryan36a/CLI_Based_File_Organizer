@@ -19,5 +19,15 @@ void organize(const fs::path& sourcePath){
         return;
     }
     std::cout<<"Total number of files: "<<count<<"\n";
+    std::string finalPath=sourcePath.string()+R"(\sorted)";
+    fs::create_directory(finalPath);
+    for(const auto& entry :fs::directory_iterator(sourcePath)){
+        if(entry.is_regular_file()){
+            if(entry.path().extension()==".txt"){
+                fs::create_directory(finalPath+R"(text files)");
+            }        
+        }
+    }
+
     return;
 }
