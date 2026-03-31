@@ -38,8 +38,12 @@ void organize(const fs::path& sourcePath){
             }
             //move file
             fs::rename(entry.path(),targetPath/entry.path().filename());
+            //display organized files
+            std::cout<<"Moved: "<<entry.path().filename()<<"->"<<type<<"\n";
+            count++;
         }
     }catch(const fs::filesystem_error& e){
         std::cerr<<"Error occured during organizing: "<<e.what()<<"\n";
     }
+    std::cout<<"Moved a total of: "<<count<<" files\n";
 }
