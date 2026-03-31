@@ -9,7 +9,7 @@ namespace fs=std::filesystem;
 //Map basic extensions
 std::string getCat(const std::string extension) {
     static std::unordered_map<std::string, std::string> mapping={
-        {".jpg","images"},{".png","image"},{".jpeg","image"},
+        {".jpg","image"},{".png","image"},{".jpeg","image"},
         {".pdf","document"},{".doc","document"},{".docx","document"},
         {".mp4","video"},{".mkv","video"}
     };

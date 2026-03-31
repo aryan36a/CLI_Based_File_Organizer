@@ -6,3 +6,4 @@
 *.o
 testing/
 working/
+test/
