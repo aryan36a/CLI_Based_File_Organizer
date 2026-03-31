@@ -18,6 +18,23 @@ std::string getCat(const std::string extension) {
     }
     return "others";
 }
+//set unique file name for same files
+fs::path getUniquePath(const fs::path& targetPath){
+    if(!fs::exists(targetPath)){
+        return targetPath;
+    }
+    fs::path parentPath=targetPath.parent_path();
+    std::string stem=targetPath.stem().string();
+    std::string ext=targetPath.extension().string();
+    int fileCount=0;
+    while(true){
+        fs::path newPath=parentPath/(stem+"_"+std::to_string(fileCount)+ext);
+        if(!fs::exists(newPath)){
+            return newPath;
+        }
+        fileCount++;
+    }
+}
 
 void organize(const fs::path& sourcePath){
     int count=0;
@@ -36,8 +53,10 @@ void organize(const fs::path& sourcePath){
             if(!fs::exists(targetPath)){
                 fs::create_directory(targetPath);
             }
+            //create valid path
+            fs::path finalPath=getUniquePath(targetPath);
             //move file
-            fs::rename(entry.path(),targetPath/entry.path().filename());
+            fs::rename(entry.path(),finalPath);
             //display organized files
             std::cout<<"Moved: "<<entry.path().filename()<<"->"<<type<<"\n";
             count++;
