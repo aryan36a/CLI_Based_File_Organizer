@@ -8,6 +8,19 @@ namespace fs=std::filesystem;
 
 void organize(const fs::path& sourcePath){
     int count=0;
+    //Map Extensions
+    std::string getCat(const std::string extension) {
+        static std::unordered_map<std::string, std::string> mapping={
+            {".jpg","images"},{".png","image"},{".jpeg","image"},
+            {".pdf","document"},{".doc","document"},{".docx","document"},
+            {".mp4","video"},{".mkv","video"}
+        }
+        if (mapping.count(extension)){
+            return mapping[extension];
+        }
+        return "others";
+    }
+
     try{
         for(const auto& entry :fs::recursive_directory_iterator(sourcePath)){
             if(entry.is_regular_file()){
