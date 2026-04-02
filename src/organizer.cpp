@@ -39,7 +39,13 @@ fs::path getUniquePath(const fs::path& targetPath){
 void organize(const fs::path& sourcePath){
     int count=0;
     try{
-        for(const auto& entry :fs::directory_iterator(sourcePath)){
+        for(const auto& entry :fs::recursive_directory_iterator(sourcePath)){
+            if(entry.path().parent_path().filename()=="image"||
+               entry.path().parent_path().filename()=="video"||
+               entry.path().parent_path().filename()=="document"||
+               entry.path().parent_path().filename()=="others"){
+                continue;
+               }
             if(!fs::is_regular_file(entry.path())){
                 continue;
             }
@@ -54,7 +60,8 @@ void organize(const fs::path& sourcePath){
                 fs::create_directory(targetPath);
             }
             //create valid path
-            fs::path finalPath=getUniquePath(targetPath);
+            fs::path targetFile = targetPath / entry.path().filename();
+            fs::path finalPath = getUniquePath(targetFile);
             //move file
             fs::rename(entry.path(),finalPath);
             //display organized files
