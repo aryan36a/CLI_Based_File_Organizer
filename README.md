@@ -13,12 +13,6 @@ A simple C++ command-line utility that sorts files into folders based on extensi
 - Linux and macOS build commands are included, but they are currently untested in this repository.
 - If you run this on Linux/macOS and notice issues, please open an issue with your compiler version and error output.
 
-## Working Demo
-
-Add your demo GIF at `assets/demo.gif` and keep this section as-is:
-
-![Working Demo](assets/demo.gif)
-
 ## What It Does
 
 Given a target directory, the program scans files recursively and moves them into category folders such as:
@@ -62,13 +56,13 @@ CLI Based File Organizer/
 ### Windows (PowerShell + g++)
 
 ```powershell
-g++ -std=c++17 -Wall -Wextra -I include src/main.cpp src/organizer.cpp -o organizer.exe
+g++ src/main.cpp src/organizer.cpp -Iinclude -o organizer
 ```
 
 ### Linux/macOS (g++)
 
 ```bash
-g++ -std=c++17 -Wall -Wextra -I include src/main.cpp src/organizer.cpp -o organizer
+g++ src/main.cpp src/organizer.cpp -Iinclude -o organizer
 ```
 
 ### MSVC (Developer Command Prompt)
@@ -82,7 +76,7 @@ cl /std:c++17 /EHsc /I include src\main.cpp src\organizer.cpp /Fe:organizer.exe
 ### Windows
 
 ```powershell
-.\organizer.exe "D:\path\to\folder"
+.\organizer "D:\path\to\folder"
 ```
 
 ### Linux/macOS
