@@ -1,71 +1,119 @@
-# File Organizer
+# CLI Based File Organizer
 
-A CLI-based file organization utility written in C++17.
+A simple C++ command-line utility that sorts files into folders based on extension.
 
-## Overview
+## What It Does
 
-File Organizer is a command-line tool that helps organize files in a directory by automatically sorting them into categorized subdirectories based on file type.
+Given a target directory, the program scans files recursively and moves them into category folders such as:
+
+- `image`
+- `video`
+- `document`
+- `audio`
+- `archive`
+- `code`
+- `binary`
+- `font`
+- `disk`
+- `others`
+
+If a file name already exists in the destination folder, the tool auto-renames it safely (for example `photo.jpg` -> `photo_1.jpg`).
 
 ## Project Structure
 
-```
-file-organizer/
-│
-├── src/
-│   ├── main.cpp           # Entry point
-│   └── organizer.cpp      # Core organization logic
-│
-├── include/
-│   └── organizer.h        # Header file with function declarations
-│
-├── Makefile               # Build configuration
-└── README.md              # This file
+```text
+CLI Based File Organizer/
+|- include/
+|  |- organizer.h
+|- src/
+|  |- main.cpp
+|  |- organizer.cpp
+|  |- include/
+|- test/
+|  |- make_files.py
+|- README.md
 ```
 
 ## Requirements
 
-- C++17 or later
-- GCC or compatible compiler
-- GNU Make (for building with Makefile)
+- C++17 compatible compiler (`g++`, `clang++`, or MSVC)
+- Git (optional)
+- Python 3 (optional, only for generating test files)
 
-## Building
+## Build
 
-### Using Makefile
+### Windows (PowerShell + g++)
 
-```bash
-make              # Build the project
-make clean        # Remove build artifacts
-make rebuild      # Clean and rebuild
+```powershell
+g++ -std=c++17 -Wall -Wextra -I include src/main.cpp src/organizer.cpp -o organizer.exe
 ```
 
-### Using g++ directly
+### Linux/macOS (g++)
 
 ```bash
-g++ -std=c++17 -Wall -Wextra -g -I include src/main.cpp src/organizer.cpp -o bin/file-organizer
+g++ -std=c++17 -Wall -Wextra -I include src/main.cpp src/organizer.cpp -o organizer
 ```
 
-## Usage
+### MSVC (Developer Command Prompt)
+
+```bat
+cl /std:c++17 /EHsc /I include src\main.cpp src\organizer.cpp /Fe:organizer.exe
+```
+
+## Run
+
+### Windows
+
+```powershell
+.\organizer.exe "D:\path\to\folder"
+```
+
+### Linux/macOS
 
 ```bash
-./bin/file-organizer <folder_path>
+./organizer "/path/to/folder"
 ```
 
-**Example:**
-```bash
-./bin/file-organizer /path/to/folder
+## Example
+
+Before:
+
+```text
+Downloads/
+|- report.pdf
+|- photo.JPG
+|- song.mp3
+|- archive.zip
 ```
 
-The organizer will sort files in the specified folder into subdirectories based on their file types.
+After running the organizer:
 
-## Features
+```text
+Downloads/
+|- document/
+|  |- report.pdf
+|- image/
+|  |- photo.JPG
+|- audio/
+|  |- song.mp3
+|- archive/
+|  |- archive.zip
+```
 
-- Automatically organizes files by type
-- Handles nested directories
-- Preserves file structure and metadata
+## Notes
 
-## License
+- Extension matching is case-insensitive (`.JPG` and `.jpg` are treated the same).
+- The tool skips files already inside known category folders.
+- Invalid paths and inaccessible directories are handled with error messages.
 
-MIT License
+## Test Data Generator (Optional)
+
+To quickly create sample files for testing:
+
+```powershell
+cd test
+python make_files.py
+```
 
 ## Author
 
