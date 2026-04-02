@@ -1,6 +1,23 @@
 # CLI Based File Organizer
 
+![C++17](https://img.shields.io/badge/C%2B%2B-17-blue)
+![Platform-Windows](https://img.shields.io/badge/Platform-Windows-success)
+![Linux/macOS-Untested](https://img.shields.io/badge/Linux%2FmacOS-Untested-orange)
+![Status-Active](https://img.shields.io/badge/Status-Active-brightgreen)
+
 A simple C++ command-line utility that sorts files into folders based on extension.
+
+## Compatibility Warning
+
+- Fully tested on Windows.
+- Linux and macOS build commands are included, but they are currently untested in this repository.
+- If you run this on Linux/macOS and notice issues, please open an issue with your compiler version and error output.
+
+## Working Demo
+
+Add your demo GIF at `assets/demo.gif` and keep this section as-is:
+
+![Working Demo](assets/demo.gif)
 
 ## What It Does
 
@@ -114,6 +131,16 @@ To quickly create sample files for testing:
 cd test
 python make_files.py
 ```
+
+## What I Learned
+
+Building this project taught me a lot about practical C++ filesystem tooling:
+
+- How to use `std::filesystem` for recursive directory traversal and file moves.
+- Why collision-safe naming matters when two files share the same name.
+- How to normalize file extensions for case-insensitive matching.
+- How small CLI tools still need solid error handling for invalid paths and permission issues.
+- Why project documentation and test-data scripts make a repo easier for others to use.
 
 ## Author
 
